@@ -1,0 +1,10 @@
+<div class="container">
+  <h1><%= @recipe.name %></h1>
+  <%= link_to "Edit", edit_recipe_path(@recipe) %>
+  <%= link_to "Delete", @recipe, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  <p><%= @recipe.instruction %></p>
+  <% @doses.each do |dose| %>
+    <p><%= dose.ingredient.full_name %>: <%= dose.amount %>g</p>
+  <% end %>
+  <%= link_to "Back", recipes_path %>
+</div>

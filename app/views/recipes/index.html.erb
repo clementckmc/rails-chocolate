@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>Choco recipes</h1>
+  <% @recipes.each do |recipe| %>
+    <%= link_to recipe_path(recipe) do %>
+      <p><%= recipe.name %></p>
+    <% end %>
+  <% end %>
+  <%= link_to "Add new recipe", new_recipe_path %>
+</div>
