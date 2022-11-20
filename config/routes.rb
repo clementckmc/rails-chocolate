@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  root to: "pages#home"
+  root to: 'recipes#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :recipes
+  resources :recipes do
+    resources :doses, only: [:new, :create]
+  end
 end
