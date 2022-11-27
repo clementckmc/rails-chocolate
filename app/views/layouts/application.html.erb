@@ -8,7 +8,10 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
-  <body>
-    <%= yield %>
+  <body class="background" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('<%= asset_path('background.jpg') %>');">
+    <div>
+      <%= render 'layouts/navbar' %>
+      <%= yield %>
+    </div>
   </body>
 </html>

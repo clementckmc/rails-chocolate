@@ -1,13 +1,21 @@
 <div class="container">
-  <h1><%= @recipe.name %></h1>
-  <%= link_to "Edit", edit_recipe_path(@recipe) %>
-  <%= link_to "Delete", @recipe, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-  <p><%= @recipe.instruction %></p>
-  <% @doses.each do |dose| %>
-    <p><%= dose.ingredient.full_name %>: <%= dose.amount %>g</p>
-  <% end %>
-  <%= link_to "Back", recipes_path %>
-  <% unless @recipe.doses.first %>
-    <%= link_to "Add ingredients", new_recipe_dose_path(@recipe)  %>
-  <% end %>
+  <div class="row justify-content-center">
+    <div class="col-5">
+      <h1><%= @recipe.name %></h1>
+      <%= @recipe.photo.attached? ? cl_image_tag(@recipe.photo.key) : image_tag("images.png") %>
+      <%= link_to "Edit", edit_recipe_path(@recipe), class: "text-btn" %>
+      <%= link_to "Delete", @recipe, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-btn" %>
+      <p><%= @recipe.instruction %></p>
+      <%= link_to "Back", recipes_path %>
+    </div>
+    <div class="col-5">
+      <h2>Ingredients</h2>
+      <% @doses.each do |dose| %>
+        <p><%= dose.ingredient.full_name %>: <%= dose.amount %>g</p>
+      <% end %>
+      <% unless @recipe.doses.first %>
+        <%= link_to "Add ingredients", new_recipe_dose_path(@recipe)  %>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -7,6 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 require 'open-uri'
 
+puts "Destroy everything"
 Recipe.destroy_all
 Ingredient.destroy_all
 Dose.destroy_all
@@ -17,21 +18,29 @@ url = "https://api.edamam.com/api/recipes/v2?type=public&q=chocolate&app_id=#{ap
 response = JSON.parse(URI.open(url).read)
 recipes = response["hits"]
 
+puts "Create Ingredients"
 Ingredient.create!({ name: "FAT", full_name: "Fat" })
 Ingredient.create!({ name: "ENERC_KCAL", full_name: "Energy" })
 Ingredient.create!({ name: "CHOCDF", full_name: "Carbs" })
 Ingredient.create!({ name: "SUGAR", full_name: "Sugar" })
 Ingredient.create!({ name: "PROCNT", full_name: "Protein" })
 
+puts "Create Recipes"
 recipes.each do |recipe|
   name = recipe['recipe']['label']
-  img_url = recipe['recipe']['image']
   instruction = recipe['recipe']["ingredientLines"].join(",")
-  new_recipe = Recipe.create!({ name: name, img_url: img_url, instruction: instruction })
+  new_recipe = Recipe.create!({ name: name, instruction: instruction })
+  img_url = recipe['recipe']['image']
+  file = URI.open(img_url)
+  new_recipe.photo.attach(
+    io: file,
+    filename: "#{recipe["id"]}.png",
+    content_type: "image/png",
+  )
   Ingredient.all.each do |ingredient|
     amount = recipe['recipe']["totalNutrients"][ingredient.name]["quantity"]
     Dose.create!({ recipe_id: new_recipe.id, ingredient_id: ingredient.id, amount: amount.round() })
   end
 end
 
-p "done"
+puts "done"

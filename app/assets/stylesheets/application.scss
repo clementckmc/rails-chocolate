@@ -10,3 +10,11 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+body {
+  color: $text-color;
+}
+
+.link {
+  text-decoration: none;
+}

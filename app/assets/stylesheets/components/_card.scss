@@ -1,0 +1,11 @@
+.card {
+  margin: 24px;
+  border: 1px solid $choco-color;
+  color: $choco-color;
+  background-color: $text-color;
+}
+
+.card:hover {
+  transition: 0.25s;
+  box-shadow: 8px 12px $choco-color;
+}
