@@ -1,4 +1,12 @@
 <div class="container">
+  <%= form_with url: recipes_path, method: :get, class: "d-flex" do %>
+    <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Find a recipe"
+  %>
+    <%= submit_tag "Search", class: "btn btn-primary" %>
+  <% end %>
   <div class="row row-cols-2 row-cols-lg-3 row-cols-lg-4">
     <% @recipes.each do |recipe| %>
       <%= link_to recipe_path(recipe), class: "link" do %>
