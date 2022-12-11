@@ -1,12 +1,16 @@
-<div class="container">
+<div class="container mt-3">
   <div class="row justify-content-center">
     <div class="col-5">
       <h1><%= @recipe.name %></h1>
-      <%= @recipe.photo.attached? ? cl_image_tag(@recipe.photo.key) : image_tag("images.png") %>
-      <%= link_to "Edit", edit_recipe_path(@recipe), class: "text-btn" %>
-      <%= link_to "Delete", @recipe, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-btn" %>
-      <p><%= @recipe.instruction %></p>
-      <%= link_to "Back", recipes_path %>
+      <div class="mt-3">
+        <%= @recipe.photo.attached? ? cl_image_tag(@recipe.photo.key) : image_tag("images.png") %>
+      </div>
+      <div class="mt-4">
+        <%= link_to "Edit", edit_recipe_path(@recipe), class: "text-btn" %>
+        <%= link_to "Delete", @recipe, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-btn" %>
+      </div>
+      <p class="mt-3"><%= @recipe.instruction %></p>
+      <%= link_to "Back", recipes_path, class: "back-btn" %>
     </div>
     <div class="col-5">
       <h2>Ingredients</h2>

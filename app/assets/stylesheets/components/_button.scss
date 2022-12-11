@@ -33,3 +33,11 @@
   background-color: $choco-color;
   transition: 0.3s;
 }
+
+.back-btn {
+  color: $text-color;
+}
+
+.back-btn:hover {
+  color: $choco-color;
+}
