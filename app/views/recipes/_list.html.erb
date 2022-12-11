@@ -1,0 +1,13 @@
+<div class="row row-cols-2 row-cols-lg-3 row-cols-lg-4", data-refresh-list-target="list">
+  <% recipes.each do |recipe| %>
+    <%= link_to recipe_path(recipe), class: "link" do %>
+      <div class="card col mb-4">
+        <%= recipe.photo.attached? ? cl_image_tag(recipe.photo.key, class:"card-img-top") : image_tag("images.png", class:"card-img-top") %>
+        <div class="card-body">
+          <h5 class="card-title"><%= recipe.name %></h5>
+          <p class="card-text">Placeholder</p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

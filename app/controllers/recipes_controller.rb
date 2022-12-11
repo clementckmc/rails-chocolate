@@ -1,9 +1,12 @@
 class RecipesController < ApplicationController
   def index
+    @recipes = Recipe.all
     if params[:query].present?
       @recipes = Recipe.search_by_name(params[:query])
-    else
-      @recipes = Recipe.all
+    end
+    respond_to do |format|
+      format.html # Follow regular flow of Rails
+      format.text { render partial: 'recipes/list', locals: { recipes: @recipes }, formats: [:html] }
     end
   end
 

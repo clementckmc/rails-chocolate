@@ -1,23 +1,15 @@
-<div class="container">
-  <%= form_with url: recipes_path, method: :get, class: "d-flex" do %>
-    <%= text_field_tag :query,
-    params[:query],
-    class: "form-control",
-    placeholder: "Find a recipe"
+<div class="container" data-controller="refresh-list">
+  <%= form_with url: recipes_path, method: :get, html: { class: 'mb-5', data: { refresh_list_target: 'form' } } do |f| %>
+    <%= f.text_field :query,
+    class: "form-control mt-3",
+    placeholder: "Find a recipe",
+    value: params[:query],
+    data: {
+      refresh_list_target: 'searchInput',
+      action: "keyup->refresh-list#update"
+    }
   %>
-    <%= submit_tag "Search", class: "btn btn-primary" %>
+    <%# <%= submit_tag "Search", class: "btn btn-primary" %>
   <% end %>
-  <div class="row row-cols-2 row-cols-lg-3 row-cols-lg-4">
-    <% @recipes.each do |recipe| %>
-      <%= link_to recipe_path(recipe), class: "link" do %>
-        <div class="card col mb-4">
-          <%= recipe.photo.attached? ? cl_image_tag(recipe.photo.key, class:"card-img-top") : image_tag("images.png", class:"card-img-top") %>
-          <div class="card-body">
-            <h5 class="card-title"><%= recipe.name %></h5>
-            <p class="card-text">Placeholder</p>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
+  <%= render 'list', recipes: @recipes %>
 </div>
