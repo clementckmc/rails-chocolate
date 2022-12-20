@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :recipes do
     resources :doses, only: [:new, :create]
+    resources :ratings, only: :create
   end
 end
