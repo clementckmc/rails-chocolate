@@ -5,7 +5,21 @@
         <%= recipe.photo.attached? ? cl_image_tag(recipe.photo.key, class:"card-img-top") : image_tag("images.png", class:"card-img-top") %>
         <div class="card-body">
           <h5 class="card-title"><%= recipe.name %></h5>
-          <p class="card-text"><%= recipe.avg_rating %></p>
+          <p class="card-text">
+            <% recipe.avg_rating.to_i.times do %>
+              <i class="fa-solid fa-star"></i>
+            <% end %>
+            <% if (recipe.avg_rating - recipe.avg_rating.to_i) > 0.25 %>
+              <i class="fa-regular fa-star-half-stroke"></i>
+              <% (5 - recipe.avg_rating.to_i - 1).times do %>
+                <i class="fa-regular fa-star"></i>
+              <% end %>
+            <% else %>
+              <% (5 - recipe.avg_rating.to_i).times do %>
+                <i class="fa-regular fa-star"></i>
+              <% end %>
+            <% end %>
+          </p>
         </div>
       </div>
     <% end %>
