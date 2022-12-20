@@ -14,6 +14,7 @@ class RecipesController < ApplicationController
 
   def show
     @doses = Dose.where(recipe_id: Recipe.find(@recipe.id))
+    @rating = Rating.new
   end
 
   def new

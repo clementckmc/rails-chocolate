@@ -14,7 +14,7 @@ class Recipe < ApplicationRecord
 
   def avg_rating
     if ratings.first
-      ratings.all.map { |rating| rating.star }.sum / ratings.all.count
+      (ratings.all.map { |rating| rating.star }.sum / ratings.all.count).floor(2)
     else
       0
     end
