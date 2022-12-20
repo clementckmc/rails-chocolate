@@ -14,14 +14,17 @@
         <%= link_to "Delete", @recipe, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-btn" %>
       </div>
       <p class="mt-5"><%= @recipe.instruction.gsub(",", ", ") %></p>
-      <h3>Add Rating</h3>
-      <%= simple_form_for([@recipe, @rating]) do |f| %>
-        <div class="star-rating">
-          <% 5.times do |i| %>
-            <input type="radio" name="rating[star]" value="<%= i + 1 %>" <%= "checked" if i == 2 %> />
-          <% end %>
-        </div>
-      <% end %>
+      <div class="mb-3">
+        <h3>Add Rating</h3>
+        <%= simple_form_for([@recipe, @rating]) do |f| %>
+          <div class="star-rating mb-5">
+            <% 5.times do |i| %>
+              <input type="radio" name="rating[star]" value="<%= i + 1 %>" <%= "checked" if i == 2 %> />
+            <% end %>
+          </div>
+          <%= f.submit %>
+        <% end %>
+      </div>
       <%= link_to "Back", recipes_path, class: "back-btn" %>
     </div>
     <div class="col-5">
