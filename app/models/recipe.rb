@@ -11,4 +11,8 @@ class Recipe < ApplicationRecord
   using: {
     tsearch: { prefix: true }
   }
+
+  def avg_rating
+    ratings.all.map { |rating| rating.star }.sum / ratings.all.count
+  end
 end

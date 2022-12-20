@@ -5,7 +5,7 @@
         <%= recipe.photo.attached? ? cl_image_tag(recipe.photo.key, class:"card-img-top") : image_tag("images.png", class:"card-img-top") %>
         <div class="card-body">
           <h5 class="card-title"><%= recipe.name %></h5>
-          <p class="card-text">Stars</p>
+          <p class="card-text"><%= recipe.avg_rating %></p>
         </div>
       </div>
     <% end %>
