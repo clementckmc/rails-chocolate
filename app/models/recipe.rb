@@ -13,6 +13,10 @@ class Recipe < ApplicationRecord
   }
 
   def avg_rating
-    ratings.all.map { |rating| rating.star }.sum / ratings.all.count
+    if ratings.first
+      ratings.all.map { |rating| rating.star }.sum / ratings.all.count
+    else
+      0
+    end
   end
 end

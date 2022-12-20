@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+
   def index
     @recipes = Recipe.all
     if params[:query].present?
@@ -11,7 +13,6 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
     @doses = Dose.where(recipe_id: Recipe.find(@recipe.id))
   end
 
@@ -29,17 +30,14 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    @recipe = Recipe.find(params[:id])
   end
 
   def update
-    @recipe = Recipe.find(params[:id])
     @recipe.update(recipe_params)
     redirect_to recipe_path(@recipe)
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
     @recipe.destroy
     redirect_to recipes_path, status: :see_other
   end
@@ -48,5 +46,9 @@ class RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:name, :instruction, :photo)
+  end
+
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
   end
 end
