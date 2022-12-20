@@ -2,6 +2,7 @@ class Recipe < ApplicationRecord
   validates :name, presence: true
   has_many :doses, dependent: :destroy
   has_many :ingredients, through: :doses
+  has_many :ratings, dependent: :destroy
   has_one_attached :photo
 
   include PgSearch::Model
@@ -10,4 +11,8 @@ class Recipe < ApplicationRecord
   using: {
     tsearch: { prefix: true }
   }
+
+  def avg_rating
+    ratings.all.map { |rating| rating.star }.sum / ratings.all.count
+  end
 end

@@ -11,6 +11,7 @@ puts "Destroy everything"
 Recipe.destroy_all
 Ingredient.destroy_all
 Dose.destroy_all
+Rating.destroy_all
 
 app_id = ENV['RECIPE_ID']
 app_key = ENV['RECIPE_KEY']
@@ -25,7 +26,7 @@ Ingredient.create!({ name: "CHOCDF", full_name: "Carbs" })
 Ingredient.create!({ name: "SUGAR", full_name: "Sugar" })
 Ingredient.create!({ name: "PROCNT", full_name: "Protein" })
 
-puts "Create Recipes"
+puts "Create Recipes (and Ratings)"
 recipes.each do |recipe|
   name = recipe['recipe']['label']
   instruction = recipe['recipe']["ingredientLines"].join(",")
@@ -37,6 +38,10 @@ recipes.each do |recipe|
     filename: "#{recipe["id"]}.png",
     content_type: "image/png",
   )
+  5.times do
+    Rating.create!({ star: rand(3..5), recipe: new_recipe })
+  end
+
   Ingredient.all.each do |ingredient|
     amount = recipe['recipe']["totalNutrients"][ingredient.name]["quantity"]
     Dose.create!({ recipe_id: new_recipe.id, ingredient_id: ingredient.id, amount: amount.round() })
