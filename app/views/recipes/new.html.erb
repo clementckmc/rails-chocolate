@@ -5,7 +5,7 @@
       <%= f.input :name %>
       <%= f.input :instruction %>
       <%= f.input :photo, as: :file %>
-      <%= f.submit %>
+      <%= f.button :submit, "Add Recipe", class: "text-btn" %>
     <% end %>
   </div>
   <%= link_to "Back" , recipes_path, class: "back-btn" %>

@@ -22,7 +22,7 @@
               <input type="radio" name="rating[star]" value="<%= i + 1 %>" <%= "checked" if i == 2 %> />
             <% end %>
           </div>
-          <%= f.submit %>
+          <%= f.button :submit, "Submit Rating", class: "text-btn" %>
         <% end %>
       </div>
       <%= link_to "Back", recipes_path, class: "back-btn" %>
@@ -33,7 +33,7 @@
         <p><%= dose.ingredient.full_name %>: <%= dose.amount %>g</p>
       <% end %>
       <% unless @recipe.doses.first %>
-        <%= link_to "Add ingredients", new_recipe_dose_path(@recipe)  %>
+        <%= link_to "Add ingredients", new_recipe_dose_path(@recipe), class: "back-btn"  %>
       <% end %>
     </div>
   </div>

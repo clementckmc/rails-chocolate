@@ -1,13 +1,16 @@
-<div class="container">
-  <%= simple_form_for([@recipe,@dose]) do |f| %>
-    <% @ingredients.each do |ingredient| %>
-      <div class="dose-form mt-3 mb-3">
-        <%= f.hidden_field :ingredient_id, value: ingredient.id, name: "ingredients[]" %>
-        <%= f.hidden_field :amount, label: ingredient.full_name %>
-        <%= ingredient.full_name %>: <%= f.input_field :amount, name: "amount[]" %> g
-      </div>
+<div class="container mt-3">
+  <div class="mb-3">
+    <h1>Add Ingredients to <%= @recipe.name %></h1>
+    <%= simple_form_for([@recipe,@dose]) do |f| %>
+      <% @ingredients.each do |ingredient| %>
+        <div class="dose-form mt-3 mb-3">
+          <%= f.hidden_field :ingredient_id, value: ingredient.id, name: "ingredients[]" %>
+          <%= f.hidden_field :amount, label: ingredient.full_name %>
+          <%= ingredient.full_name %>: <%= f.input_field :amount, name: "amount[]" %> g
+        </div>
+      <% end %>
+      <%= f.button :submit, "Add Ingredients", class: "text-btn" %>
     <% end %>
-    <%= f.submit %>
-  <% end %>
-  <%= link_to "Back", recipe_path(@recipe)  %>
+  </div>
+  <%= link_to "Back", recipe_path(@recipe), class: "back-btn"  %>
 </div>
